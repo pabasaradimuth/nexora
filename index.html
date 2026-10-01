@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NEXORA | Digital Games & Entertainment</title>
+
+    <meta name="description"
+          content="NEXORA is an upcoming digital games and entertainment store. Discover games, digital content and more.">
+
+    <style>
+
+        /* =========================
+           BASIC SETTINGS
+        ========================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Inter, Arial, Helvetica, sans-serif;
+            background:
+                radial-gradient(circle at 20% 0%, rgba(73, 67, 255, 0.13), transparent 35%),
+                radial-gradient(circle at 90% 15%, rgba(0, 229, 255, 0.08), transparent 30%),
+                #070912;
+
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+
+        /* =========================
+           NAVIGATION
+        ========================== */
+
+        nav {
+            width: 100%;
+            height: 78px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7%;
+
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+
+            background: rgba(7, 9, 18, 0.82);
+            backdrop-filter: blur(18px);
+
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 900;
+            letter-spacing: 4px;
+        }
+
+        .logo span {
+            color: #00e5ff;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 35px;
+
+            list-style: none;
+
+            font-size: 14px;
+            color: #b7bdca;
+        }
+
+        .nav-links a {
+            transition: 0.25s;
+        }
+
+        .nav-links a:hover {
+            color: #00e5ff;
+        }
+
+        .nav-button {
+            padding: 10px 20px;
+
+            border: 1px solid rgba(0,229,255,0.45);
+            border-radius: 8px;
+
+            color: #00e5ff !important;
+        }
+
+
+        /* =========================
+           HERO
+        ========================== */
+
+        .hero {
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            padding: 130px 20px 80px;
+
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+
+            position: absolute;
+
+            width: 600px;
+            height: 600px;
+
+            border-radius: 50%;
+
+            background: rgba(88, 65, 255, 0.16);
+
+            filter: blur(130px);
+
+            top: 10%;
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+
+            padding: 8px 15px;
+
+            border-radius: 100px;
+
+            border: 1px solid rgba(0,229,255,0.22);
+
+            background: rgba(0,229,255,0.06);
+
+            color: #77f3ff;
+
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+
+            margin-bottom: 28px;
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: #00e5ff;
+
+            box-shadow: 0 0 12px #00e5ff;
+        }
+
+        .hero h1 {
+            font-size: clamp(50px, 8vw, 92px);
+            line-height: 1;
+
+            letter-spacing: -4px;
+
+            margin-bottom: 25px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #ffffff, #77f3ff, #8177ff);
+
+            -webkit-background-clip: text;
+            background-clip: text;
+
+            color: transparent;
+        }
+
+        .hero p {
+            max-width: 680px;
+
+            margin: 0 auto 38px;
+
+            color: #9da5b5;
+
+            font-size: 18px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+
+            flex-wrap: wrap;
+        }
+
+        .primary-button,
+        .secondary-button {
+            display: inline-block;
+
+            padding: 14px 26px;
+
+            border-radius: 9px;
+
+            font-weight: 700;
+
+            transition: 0.25s;
+        }
+
+        .primary-button {
+            background: linear-gradient(135deg, #00e5ff, #6d63ff);
+
+            color: #050710;
+
+            box-shadow: 0 10px 35px rgba(0,229,255,0.16);
+        }
+
+        .primary-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,229,255,0.25);
+        }
+
+        .secondary-button {
+            border: 1px solid rgba(255,255,255,0.13);
+
+            background: rgba(255,255,255,0.035);
+
+            color: #d8dce5;
+        }
+
+        .secondary-button:hover {
+            border-color: rgba(0,229,255,0.4);
+            color: #00e5ff;
+        }
+
+
+        /* =========================
+           GENERAL SECTIONS
+        ========================== */
+
+        section {
+            padding: 100px 7%;
+        }
+
+        .section-header {
+            max-width: 650px;
+            margin-bottom: 45px;
+        }
+
+        .section-label {
+            color: #00e5ff;
+
+            text-transform: uppercase;
+
+            font-size: 12px;
+            letter-spacing: 2px;
+            font-weight: bold;
+
+            margin-bottom: 10px;
+        }
+
+        .section-header h2 {
+            font-size: clamp(32px, 5vw, 48px);
+
+            margin-bottom: 12px;
+
+            letter-spacing: -1px;
+        }
+
+        .section-header p {
+            color: #8e96a8;
+        }
+
+
+        /* =========================
+           PRODUCT CARDS
+        ========================== */
+
+        .games {
+            background: rgba(255,255,255,0.01);
+        }
+
+        .game-grid {
+            display: grid;
+
+            grid-template-columns: repeat(4, 1fr);
+
+            gap: 18px;
+        }
+
+        .game-card {
+            min-height: 330px;
+
+            padding: 25px;
+
+            border-radius: 18px;
+
+            border: 1px solid rgba(255,255,255,0.08);
+
+            background:
+                linear-gradient(160deg,
+                    rgba(255,255,255,0.055),
+                    rgba(255,255,255,0.018)
+                );
+
+            position: relative;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+
+            overflow: hidden;
+
+            transition: 0.3s;
+        }
+
+        .game-card:hover {
+            transform: translateY(-7px);
+
+            border-color: rgba(0,229,255,0.3);
+        }
+
+        .game-card::before {
+            content: "";
+
+            position: absolute;
+
+            width: 200px;
+            height: 200px;
+
+            border-radius: 50%;
+
+            top: -70px;
+            right: -70px;
+
+            background: rgba(109,99,255,0.15);
+
+            filter: blur(45px);
+        }
+
+        .game-icon {
+            position: absolute;
+
+            top: 30px;
+            left: 25px;
+
+            font-size: 55px;
+
+            opacity: 0.85;
+        }
+
+        .coming-soon {
+            position: absolute;
+
+            top: 20px;
+            right: 20px;
+
+            padding: 5px 9px;
+
+            border-radius: 5px;
+
+            font-size: 10px;
+            letter-spacing: 1px;
+            font-weight: bold;
+
+            color: #76f4ff;
+
+            background: rgba(0,229,255,0.09);
+
+            border: 1px solid rgba(0,229,255,0.15);
+        }
+
+        .game-card h3 {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .game-card p {
+            color: #7f8798;
+            font-size: 13px;
+        }
+
+
+        /* =========================
+           PLATFORM CARDS
+        ========================== */
+
+        .platform-grid {
+            display: grid;
+
+            grid-template-columns: repeat(4, 1fr);
+
+            gap: 16px;
+        }
+
+        .platform {
+            padding: 30px;
+
+            border-radius: 15px;
+
+            text-align: center;
+
+            border: 1px solid rgba(255,255,255,0.07);
+
+            background: rgba(255,255,255,0.025);
+
+            transition: 0.25s;
+        }
+
+        .platform:hover {
+            background: rgba(0,229,255,0.05);
+
+            border-color: rgba(0,229,255,0.25);
+
+            transform: translateY(-4px);
+        }
+
+        .platform-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .platform h3 {
+            font-size: 15px;
+        }
+
+        .platform p {
+            color: #777f90;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+
+        /* =========================
+           HOW IT WORKS
+        ========================== */
+
+        .steps {
+            display: grid;
+
+            grid-template-columns: repeat(4, 1fr);
+
+            gap: 25px;
+        }
+
+        .step {
+            position: relative;
+
+            padding: 30px 20px;
+        }
+
+        .step-number {
+            width: 45px;
+            height: 45px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 10px;
+
+            background: linear-gradient(
+                135deg,
+                rgba(0,229,255,0.15),
+                rgba(109,99,255,0.18)
+            );
+
+            border: 1px solid rgba(0,229,255,0.18);
+
+            color: #72f2ff;
+
+            font-weight: bold;
+
+            margin-bottom: 20px;
+        }
+
+        .step h3 {
+            margin-bottom: 8px;
+        }
+
+        .step p {
+            color: #858d9e;
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           ABOUT
+        ========================== */
+
+        .about-box {
+            max-width: 1100px;
+
+            margin: auto;
+
+            padding: 65px;
+
+            border-radius: 25px;
+
+            border: 1px solid rgba(255,255,255,0.08);
+
+            background:
+                radial-gradient(circle at 100% 0%,
+                    rgba(0,229,255,0.08),
+                    transparent 30%
+                ),
+                rgba(255,255,255,0.025);
+        }
+
+        .about-box h2 {
+            font-size: 38px;
+
+            margin-bottom: 20px;
+        }
+
+        .about-box p {
+            color: #969dad;
+
+            max-width: 780px;
+
+            margin-bottom: 15px;
+        }
+
+
+        /* =========================
+           PARTNER SECTION
+        ========================== */
+
+        .partner-section {
+            text-align: center;
+        }
+
+        .partner-box {
+            max-width: 900px;
+
+            margin: auto;
+
+            padding: 70px 30px;
+
+            border-radius: 25px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(0,229,255,0.07),
+                    rgba(109,99,255,0.08)
+                );
+
+            border: 1px solid rgba(0,229,255,0.13);
+        }
+
+        .partner-box h2 {
+            font-size: 38px;
+            margin-bottom: 15px;
+        }
+
+        .partner-box p {
+            max-width: 650px;
+
+            margin: auto;
+
+            color: #9299a9;
+        }
+
+
+        /* =========================
+           FAQ
+        ========================== */
+
+        .faq {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .faq-item {
+            padding: 25px 0;
+
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .faq-item h3 {
+            font-size: 16px;
+
+            margin-bottom: 8px;
+        }
+
+        .faq-item p {
+            color: #838b9b;
+
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        footer {
+            padding: 50px 7% 30px;
+
+            border-top: 1px solid rgba(255,255,255,0.07);
+
+            background: #05070d;
+        }
+
+        .footer-main {
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 30px;
+
+            margin-bottom: 45px;
+        }
+
+        .footer-brand p {
+            color: #71798a;
+
+            font-size: 13px;
+
+            max-width: 350px;
+
+            margin-top: 10px;
+        }
+
+        .footer-contact {
+            text-align: right;
+        }
+
+        .footer-contact p {
+            color: #747c8d;
+
+            font-size: 13px;
+        }
+
+        .copyright {
+            padding-top: 20px;
+
+            border-top: 1px solid rgba(255,255,255,0.05);
+
+            color: #545b69;
+
+            font-size: 12px;
+
+            text-align: center;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================== */
+
+        @media(max-width: 950px) {
+
+            .game-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .platform-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+
+        @media(max-width: 650px) {
+
+            nav {
+                padding: 0 5%;
+            }
+
+            .nav-links li:not(:last-child) {
+                display: none;
+            }
+
+            .hero h1 {
+                letter-spacing: -2px;
+            }
+
+            section {
+                padding: 80px 6%;
+            }
+
+            .game-grid,
+            .platform-grid,
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .about-box {
+                padding: 40px 25px;
+            }
+
+            .footer-main {
+                flex-direction: column;
+            }
+
+            .footer-contact {
+                text-align: left;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     NAVIGATION
+========================== -->
+
+<nav>
+
+    <a href="#" class="logo">
+        NEX<span>O</span>RA
+    </a>
+
+    <ul class="nav-links">
+
+        <li>
+            <a href="#games">Games</a>
+        </li>
+
+        <li>
+            <a href="#platforms">Platforms</a>
+        </li>
+
+        <li>
+            <a href="#about">About</a>
+        </li>
+
+        <li>
+            <a href="#faq">FAQ</a>
+        </li>
+
+        <li>
+            <a href="#contact" class="nav-button">
+                Contact
+            </a>
+        </li>
+
+    </ul>
+
+</nav>
+
+
+
+<!-- =========================
+     HERO
+========================== -->
+
+<header class="hero">
+
+    <div class="hero-content">
+
+        <div class="status">
+            <span class="status-dot"></span>
+            NEXORA STORE · PRE-LAUNCH
+        </div>
+
+        <h1>
+            Your next game
+            <span class="gradient-text">
+                starts here.
+            </span>
+        </h1>
+
+        <p>
+            NEXORA is an upcoming digital games and entertainment
+            storefront built to make discovering and accessing digital
+            gaming content simple, secure and convenient.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="#games" class="primary-button">
+                Explore NEXORA
+            </a>
+
+            <a href="#about" class="secondary-button">
+                About Our Store
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- =========================
+     UPCOMING PRODUCTS
+========================== -->
+
+<section class="games" id="games">
+
+    <div class="section-header">
+
+        <div class="section-label">
+            Coming to NEXORA
+        </div>
+
+        <h2>
+            Digital gaming, one destination.
+        </h2>
+
+        <p>
+            We're building our catalog with the goal of offering
+            digital gaming products across popular PC and console
+            platforms.
+        </p>
+
+    </div>
+
+
+    <div class="game-grid">
+
+        <div class="game-card">
+
+            <div class="game-icon">
+                🏙️
+            </div>
+
+            <span class="coming-soon">
+                COMING SOON
+            </span>
+
+            <h3>
+                Action & Open World
+            </h3>
+
+            <p>
+                Digital PC game licenses
+            </p>
+
+        </div>
+
+
+        <div class="game-card">
+
+            <div class="game-icon">
+                🏎️
+            </div>
+
+            <span class="coming-soon">
+                COMING SOON
+            </span>
+
+            <h3>
+                Racing
+            </h3>
+
+            <p>
+                Digital PC & console titles
+            </p>
+
+        </div>
+
+
+        <div class="game-card">
+
+            <div class="game-icon">
+                ⚔️
+            </div>
+
+            <span class="coming-soon">
+                COMING SOON
+            </span>
+
+            <h3>
+                RPG & Adventure
+            </h3>
+
+            <p>
+                Digital games and content
+            </p>
+
+        </div>
+
+
+        <div class="game-card">
+
+            <div class="game-icon">
+                🎮
+            </div>
+
+            <span class="coming-soon">
+                COMING SOON
+            </span>
+
+            <h3>
+                More Games
+            </h3>
+
+            <p>
+                A growing digital catalog
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     PLATFORMS
+========================== -->
+
+<section id="platforms">
+
+    <div class="section-header">
+
+        <div class="section-label">
+            Platforms
+        </div>
+
+        <h2>
+            Built for gamers.
+        </h2>
+
+        <p>
+            NEXORA is preparing to support digital products
+            across major gaming ecosystems.
+        </p>
+
+    </div>
+
+
+    <div class="platform-grid">
+
+        <div class="platform">
+
+            <div class="platform-icon">
+                🖥️
+            </div>
+
+            <h3>PC Gaming</h3>
+
+            <p>
+                Digital game licenses
+            </p>
+
+        </div>
+
+
+        <div class="platform">
+
+            <div class="platform-icon">
+                🎮
+            </div>
+
+            <h3>Console Gaming</h3>
+
+            <p>
+                Games and digital content
+            </p>
+
+        </div>
+
+
+        <div class="platform">
+
+            <div class="platform-icon">
+                💎
+            </div>
+
+            <h3>Gaming Content</h3>
+
+            <p>
+                Selected digital products
+            </p>
+
+        </div>
+
+
+        <div class="platform">
+
+            <div class="platform-icon">
+                🎁
+            </div>
+
+            <h3>Digital Codes</h3>
+
+            <p>
+                Convenient digital delivery
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     HOW IT WORKS
+========================== -->
+
+<section>
+
+    <div class="section-header">
+
+        <div class="section-label">
+            The NEXORA Experience
+        </div>
+
+        <h2>
+            Simple from start to finish.
+        </h2>
+
+    </div>
+
+
+    <div class="steps">
+
+        <div class="step">
+
+            <div class="step-number">
+                01
+            </div>
+
+            <h3>Discover</h3>
+
+            <p>
+                Browse available games and digital gaming products.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                02
+            </div>
+
+            <h3>Choose</h3>
+
+            <p>
+                Select the product and platform that suits you.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                03
+            </div>
+
+            <h3>Purchase</h3>
+
+            <p>
+                Complete your order through our secure checkout.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                04
+            </div>
+
+            <h3>Play</h3>
+
+            <p>
+                Receive your digital product and follow its
+                platform-specific activation instructions.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     ABOUT
+========================== -->
+
+<section id="about">
+
+    <div class="about-box">
+
+        <div class="section-label">
+            About NEXORA
+        </div>
+
+        <h2>
+            Building a better digital gaming store.
+        </h2>
+
+        <p>
+            NEXORA is an independent digital storefront currently
+            preparing for launch.
+        </p>
+
+        <p>
+            We are establishing relationships with digital content
+            distributors and developing the infrastructure required
+            to provide customers with a reliable and convenient
+            purchasing experience.
+        </p>
+
+        <p>
+            Products will only become available for purchase once
+            the appropriate distribution arrangements and store
+            systems are in place.
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     DISTRIBUTORS
+========================== -->
+
+<section class="partner-section">
+
+    <div class="partner-box">
+
+        <div class="section-label">
+            Distribution & Publishing
+        </div>
+
+        <h2>
+            Let's work together.
+        </h2>
+
+        <p>
+            NEXORA welcomes opportunities to work with authorized
+            game distributors, publishers and digital-content
+            providers as we build our launch catalog.
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     FAQ
+========================== -->
+
+<section id="faq">
+
+    <div class="faq">
+
+        <div class="section-header">
+
+            <div class="section-label">
+                FAQ
+            </div>
+
+            <h2>
+                Frequently asked questions.
+            </h2>
+
+        </div>
+
+
+        <div class="faq-item">
+
+            <h3>
+                Is NEXORA currently accepting orders?
+            </h3>
+
+            <p>
+                Not yet. NEXORA is currently in its pre-launch
+                stage and is not accepting customer payments.
+            </p>
+
+        </div>
+
+
+        <div class="faq-item">
+
+            <h3>
+                What will NEXORA sell?
+            </h3>
+
+            <p>
+                We are preparing a catalog focused on digital
+                games and related digital gaming products.
+                The final catalog will depend on our distribution
+                arrangements.
+            </p>
+
+        </div>
+
+
+        <div class="faq-item">
+
+            <h3>
+                How will products be delivered?
+            </h3>
+
+            <p>
+                Eligible digital products will be delivered
+                electronically with the appropriate activation
+                or redemption instructions.
+            </p>
+
+        </div>
+
+
+        <div class="faq-item">
+
+            <h3>
+                When will NEXORA launch?
+            </h3>
+
+            <p>
+                Our storefront is currently being prepared.
+                Launch information will be announced once our
+                catalog and distribution systems are ready.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     FOOTER
+========================== -->
+
+<footer id="contact">
+
+    <div class="footer-main">
+
+        <div class="footer-brand">
+
+            <div class="logo">
+                NEX<span>O</span>RA
+            </div>
+
+            <p>
+                Digital Games & Entertainment.
+                A new digital storefront currently preparing
+                for launch.
+            </p>
+
+        </div>
+
+
+        <div class="footer-contact">
+
+            <strong>
+                Business Enquiries
+            </strong>
+
+            <p>
+                Email: pabasaradimuth12345@email.com
+            </p>
+
+            <p>
+                Sri Lanka
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="copyright">
+
+        © <span id="year"></span> NEXORA.
+        All rights reserved.
+
+    </div>
+
+</footer>
+
+
+
+<script>
+
+    // Automatically displays the current year.
+
+    document.getElementById("year").textContent =
+        new Date().getFullYear();
+
+</script>
+
+
+</body>
+</html>
