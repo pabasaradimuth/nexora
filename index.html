@@ -58,9 +58,16 @@ section{padding:90px 7%}
 .game-card{border:1px solid var(--border);background:linear-gradient(160deg,rgba(255,255,255,.055),rgba(255,255,255,.018));
 border-radius:18px;overflow:hidden;transition:.3s;display:flex;flex-direction:column}
 .game-card:hover{transform:translateY(-6px);border-color:rgba(0,229,255,.32)}
-.cover{height:190px;padding:20px;display:flex;align-items:flex-end;position:relative;background:
-radial-gradient(circle at 80% 20%,rgba(0,229,255,.24),transparent 35%),
-linear-gradient(135deg,#1a2240,#111827 55%,#09111d)}
+.cover{
+    height:230px;
+    padding:20px;
+    display:flex;
+    align-items:flex-end;
+    position:relative;
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+}
 .cover:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 35%,rgba(7,9,18,.86))}
 .cover-title{position:relative;z-index:2;font-size:22px;font-weight:900;line-height:1.08;max-width:90%}
 .badge{position:absolute;z-index:3;top:14px;right:14px;padding:5px 8px;border-radius:5px;font-size:9px;letter-spacing:1px;font-weight:900;
@@ -272,7 +279,7 @@ input:focus,select:focus{border-color:rgba(0,229,255,.45)}
 
 <script>
 const games = [
- {name:"Grand Theft Auto V Enhanced",short:"GTA V Enhanced",platform:"Rockstar Games",region:"Global",price:19.99,badge:"POPULAR"},
+ {name:"Grand Theft Auto V Enhanced",short:"GTA V Enhanced",platform:"Rockstar Games",region:"Global",price:19.99,badge:"POPULAR",image:"images/gta-v.jpg"},
  {name:"Red Dead Redemption 2",short:"Red Dead Redemption 2",platform:"Rockstar Games",region:"Global",price:22.99,badge:"TOP VALUE"},
  {name:"Black Myth: Wukong",short:"Black Myth: Wukong",platform:"Steam",region:"Global",price:44.99,badge:"POPULAR"},
  {name:"Days Gone",short:"Days Gone",platform:"Steam",region:"Global*",price:19.99,badge:"GREAT VALUE"},
@@ -291,7 +298,7 @@ games.forEach((g,i)=>{
  const card=document.createElement("article");
  card.className="game-card";
  card.innerHTML=`
- <div class="cover"><span class="badge">${g.badge}</span><div class="cover-title">${g.short}</div></div>
+ <div class="cover" style="background-image:url('${g.image}')"><span class="badge">${g.badge}</span><div class="cover-title">${g.short}</div></div>
  <div class="card-body">
    <div class="game-name">${g.name}</div>
    <div class="meta"><span class="pill">${g.platform}</span><span class="pill">${g.region}</span><span class="pill">Digital Key</span></div>
