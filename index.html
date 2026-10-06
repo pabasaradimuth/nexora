@@ -1,1339 +1,332 @@
-<!DOCTYPE html>
+from pathlib import Path
+
+html = r'''<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>NEXORA | Digital Games & Entertainment</title>
-
-    <meta name="description"
-          content="NEXORA is an upcoming digital games and entertainment store. Discover games, digital content and more.">
-
-    <style>
-
-        /* =========================
-           BASIC SETTINGS
-        ========================== */
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: Inter, Arial, Helvetica, sans-serif;
-            background:
-                radial-gradient(circle at 20% 0%, rgba(73, 67, 255, 0.13), transparent 35%),
-                radial-gradient(circle at 90% 15%, rgba(0, 229, 255, 0.08), transparent 30%),
-                #070912;
-
-            color: #ffffff;
-            line-height: 1.6;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-
-        /* =========================
-           NAVIGATION
-        ========================== */
-
-        nav {
-            width: 100%;
-            height: 78px;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            padding: 0 7%;
-
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 1000;
-
-            background: rgba(7, 9, 18, 0.82);
-            backdrop-filter: blur(18px);
-
-            border-bottom: 1px solid rgba(255,255,255,0.07);
-        }
-
-        .logo {
-            font-size: 25px;
-            font-weight: 900;
-            letter-spacing: 4px;
-        }
-
-        .logo span {
-            color: #00e5ff;
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 35px;
-
-            list-style: none;
-
-            font-size: 14px;
-            color: #b7bdca;
-        }
-
-        .nav-links a {
-            transition: 0.25s;
-        }
-
-        .nav-links a:hover {
-            color: #00e5ff;
-        }
-
-        .nav-button {
-            padding: 10px 20px;
-
-            border: 1px solid rgba(0,229,255,0.45);
-            border-radius: 8px;
-
-            color: #00e5ff !important;
-        }
-
-
-        /* =========================
-           HERO
-        ========================== */
-
-        .hero {
-            min-height: 100vh;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            text-align: center;
-
-            padding: 130px 20px 80px;
-
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: "";
-
-            position: absolute;
-
-            width: 600px;
-            height: 600px;
-
-            border-radius: 50%;
-
-            background: rgba(88, 65, 255, 0.16);
-
-            filter: blur(130px);
-
-            top: 10%;
-            left: 50%;
-
-            transform: translateX(-50%);
-
-            pointer-events: none;
-        }
-
-        .hero-content {
-            max-width: 900px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .status {
-            display: inline-flex;
-            align-items: center;
-            gap: 9px;
-
-            padding: 8px 15px;
-
-            border-radius: 100px;
-
-            border: 1px solid rgba(0,229,255,0.22);
-
-            background: rgba(0,229,255,0.06);
-
-            color: #77f3ff;
-
-            font-size: 12px;
-            font-weight: bold;
-            letter-spacing: 1.5px;
-
-            margin-bottom: 28px;
-        }
-
-        .status-dot {
-            width: 7px;
-            height: 7px;
-
-            border-radius: 50%;
-
-            background: #00e5ff;
-
-            box-shadow: 0 0 12px #00e5ff;
-        }
-
-        .hero h1 {
-            font-size: clamp(50px, 8vw, 92px);
-            line-height: 1;
-
-            letter-spacing: -4px;
-
-            margin-bottom: 25px;
-        }
-
-        .gradient-text {
-            background: linear-gradient(90deg, #ffffff, #77f3ff, #8177ff);
-
-            -webkit-background-clip: text;
-            background-clip: text;
-
-            color: transparent;
-        }
-
-        .hero p {
-            max-width: 680px;
-
-            margin: 0 auto 38px;
-
-            color: #9da5b5;
-
-            font-size: 18px;
-        }
-
-        .hero-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 14px;
-
-            flex-wrap: wrap;
-        }
-
-        .primary-button,
-        .secondary-button {
-            display: inline-block;
-
-            padding: 14px 26px;
-
-            border-radius: 9px;
-
-            font-weight: 700;
-
-            transition: 0.25s;
-        }
-
-        .primary-button {
-            background: linear-gradient(135deg, #00e5ff, #6d63ff);
-
-            color: #050710;
-
-            box-shadow: 0 10px 35px rgba(0,229,255,0.16);
-        }
-
-        .primary-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0,229,255,0.25);
-        }
-
-        .secondary-button {
-            border: 1px solid rgba(255,255,255,0.13);
-
-            background: rgba(255,255,255,0.035);
-
-            color: #d8dce5;
-        }
-
-        .secondary-button:hover {
-            border-color: rgba(0,229,255,0.4);
-            color: #00e5ff;
-        }
-
-
-        /* =========================
-           GENERAL SECTIONS
-        ========================== */
-
-        section {
-            padding: 100px 7%;
-        }
-
-        .section-header {
-            max-width: 650px;
-            margin-bottom: 45px;
-        }
-
-        .section-label {
-            color: #00e5ff;
-
-            text-transform: uppercase;
-
-            font-size: 12px;
-            letter-spacing: 2px;
-            font-weight: bold;
-
-            margin-bottom: 10px;
-        }
-
-        .section-header h2 {
-            font-size: clamp(32px, 5vw, 48px);
-
-            margin-bottom: 12px;
-
-            letter-spacing: -1px;
-        }
-
-        .section-header p {
-            color: #8e96a8;
-        }
-
-
-        /* =========================
-           PRODUCT CARDS
-        ========================== */
-
-        .games {
-            background: rgba(255,255,255,0.01);
-        }
-
-        .game-grid {
-            display: grid;
-
-            grid-template-columns: repeat(4, 1fr);
-
-            gap: 18px;
-        }
-
-        .game-card {
-            min-height: 330px;
-
-            padding: 25px;
-
-            border-radius: 18px;
-
-            border: 1px solid rgba(255,255,255,0.08);
-
-            background:
-                linear-gradient(160deg,
-                    rgba(255,255,255,0.055),
-                    rgba(255,255,255,0.018)
-                );
-
-            position: relative;
-
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-
-            overflow: hidden;
-
-            transition: 0.3s;
-        }
-
-        .game-card:hover {
-            transform: translateY(-7px);
-
-            border-color: rgba(0,229,255,0.3);
-        }
-
-        .game-card::before {
-            content: "";
-
-            position: absolute;
-
-            width: 200px;
-            height: 200px;
-
-            border-radius: 50%;
-
-            top: -70px;
-            right: -70px;
-
-            background: rgba(109,99,255,0.15);
-
-            filter: blur(45px);
-        }
-
-        .game-icon {
-            position: absolute;
-
-            top: 30px;
-            left: 25px;
-
-            font-size: 55px;
-
-            opacity: 0.85;
-        }
-
-        .coming-soon {
-            position: absolute;
-
-            top: 20px;
-            right: 20px;
-
-            padding: 5px 9px;
-
-            border-radius: 5px;
-
-            font-size: 10px;
-            letter-spacing: 1px;
-            font-weight: bold;
-
-            color: #76f4ff;
-
-            background: rgba(0,229,255,0.09);
-
-            border: 1px solid rgba(0,229,255,0.15);
-        }
-
-        .game-card h3 {
-            font-size: 20px;
-            margin-bottom: 5px;
-        }
-
-        .game-card p {
-            color: #7f8798;
-            font-size: 13px;
-        }
-
-
-        /* =========================
-           PLATFORM CARDS
-        ========================== */
-
-        .platform-grid {
-            display: grid;
-
-            grid-template-columns: repeat(4, 1fr);
-
-            gap: 16px;
-        }
-
-        .platform {
-            padding: 30px;
-
-            border-radius: 15px;
-
-            text-align: center;
-
-            border: 1px solid rgba(255,255,255,0.07);
-
-            background: rgba(255,255,255,0.025);
-
-            transition: 0.25s;
-        }
-
-        .platform:hover {
-            background: rgba(0,229,255,0.05);
-
-            border-color: rgba(0,229,255,0.25);
-
-            transform: translateY(-4px);
-        }
-
-        .platform-icon {
-            font-size: 32px;
-            margin-bottom: 10px;
-        }
-
-        .platform h3 {
-            font-size: 15px;
-        }
-
-        .platform p {
-            color: #777f90;
-            font-size: 12px;
-            margin-top: 5px;
-        }
-
-
-        /* =========================
-           HOW IT WORKS
-        ========================== */
-
-        .steps {
-            display: grid;
-
-            grid-template-columns: repeat(4, 1fr);
-
-            gap: 25px;
-        }
-
-        .step {
-            position: relative;
-
-            padding: 30px 20px;
-        }
-
-        .step-number {
-            width: 45px;
-            height: 45px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            border-radius: 10px;
-
-            background: linear-gradient(
-                135deg,
-                rgba(0,229,255,0.15),
-                rgba(109,99,255,0.18)
-            );
-
-            border: 1px solid rgba(0,229,255,0.18);
-
-            color: #72f2ff;
-
-            font-weight: bold;
-
-            margin-bottom: 20px;
-        }
-
-        .step h3 {
-            margin-bottom: 8px;
-        }
-
-        .step p {
-            color: #858d9e;
-            font-size: 14px;
-        }
-
-
-        /* =========================
-           ABOUT
-        ========================== */
-
-        .about-box {
-            max-width: 1100px;
-
-            margin: auto;
-
-            padding: 65px;
-
-            border-radius: 25px;
-
-            border: 1px solid rgba(255,255,255,0.08);
-
-            background:
-                radial-gradient(circle at 100% 0%,
-                    rgba(0,229,255,0.08),
-                    transparent 30%
-                ),
-                rgba(255,255,255,0.025);
-        }
-
-        .about-box h2 {
-            font-size: 38px;
-
-            margin-bottom: 20px;
-        }
-
-        .about-box p {
-            color: #969dad;
-
-            max-width: 780px;
-
-            margin-bottom: 15px;
-        }
-
-
-        /* =========================
-           PARTNER SECTION
-        ========================== */
-
-        .partner-section {
-            text-align: center;
-        }
-
-        .partner-box {
-            max-width: 900px;
-
-            margin: auto;
-
-            padding: 70px 30px;
-
-            border-radius: 25px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(0,229,255,0.07),
-                    rgba(109,99,255,0.08)
-                );
-
-            border: 1px solid rgba(0,229,255,0.13);
-        }
-
-        .partner-box h2 {
-            font-size: 38px;
-            margin-bottom: 15px;
-        }
-
-        .partner-box p {
-            max-width: 650px;
-
-            margin: auto;
-
-            color: #9299a9;
-        }
-
-
-        /* =========================
-           FAQ
-        ========================== */
-
-        .faq {
-            max-width: 900px;
-            margin: auto;
-        }
-
-        .faq-item {
-            padding: 25px 0;
-
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-        }
-
-        .faq-item h3 {
-            font-size: 16px;
-
-            margin-bottom: 8px;
-        }
-
-        .faq-item p {
-            color: #838b9b;
-
-            font-size: 14px;
-        }
-
-
-        /* =========================
-           FOOTER
-        ========================== */
-
-        footer {
-            padding: 50px 7% 30px;
-
-            border-top: 1px solid rgba(255,255,255,0.07);
-
-            background: #05070d;
-        }
-
-        .footer-main {
-            display: flex;
-
-            justify-content: space-between;
-
-            gap: 30px;
-
-            margin-bottom: 45px;
-        }
-
-        .footer-brand p {
-            color: #71798a;
-
-            font-size: 13px;
-
-            max-width: 350px;
-
-            margin-top: 10px;
-        }
-
-        .footer-contact {
-            text-align: right;
-        }
-
-        .footer-contact p {
-            color: #747c8d;
-
-            font-size: 13px;
-        }
-
-        .copyright {
-            padding-top: 20px;
-
-            border-top: 1px solid rgba(255,255,255,0.05);
-
-            color: #545b69;
-
-            font-size: 12px;
-
-            text-align: center;
-        }
-
-
-        /* =========================
-           MOBILE
-        ========================== */
-
-        @media(max-width: 950px) {
-
-            .game-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .platform-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .steps {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-        }
-
-
-        @media(max-width: 650px) {
-
-            nav {
-                padding: 0 5%;
-            }
-
-            .nav-links li:not(:last-child) {
-                display: none;
-            }
-
-            .hero h1 {
-                letter-spacing: -2px;
-            }
-
-            section {
-                padding: 80px 6%;
-            }
-
-            .game-grid,
-            .platform-grid,
-            .steps {
-                grid-template-columns: 1fr;
-            }
-
-            .about-box {
-                padding: 40px 25px;
-            }
-
-            .footer-main {
-                flex-direction: column;
-            }
-
-            .footer-contact {
-                text-align: left;
-            }
-
-        }
-
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXORA | Digital Game Keys</title>
+<meta name="description" content="NEXORA is an independent digital game store offering PC and console activation keys with secure checkout and electronic delivery.">
+<style>
+:root{
+  --bg:#070912; --panel:#0e1320; --panel2:#121a29; --text:#fff; --muted:#9099ad;
+  --cyan:#00e5ff; --purple:#756bff; --green:#65f5b1; --border:rgba(255,255,255,.09);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:Inter,Arial,Helvetica,sans-serif;background:
+radial-gradient(circle at 20% 0%,rgba(73,67,255,.13),transparent 35%),
+radial-gradient(circle at 90% 15%,rgba(0,229,255,.08),transparent 30%),var(--bg);
+color:var(--text);line-height:1.6}
+a{text-decoration:none;color:inherit}
+button,input,select{font:inherit}
+nav{width:100%;height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 7%;
+position:fixed;top:0;left:0;z-index:1000;background:rgba(7,9,18,.88);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+.logo{font-size:25px;font-weight:900;letter-spacing:4px}.logo span{color:var(--cyan)}
+.nav-links{display:flex;align-items:center;gap:30px;list-style:none;font-size:14px;color:#b7bdca}
+.nav-links a:hover{color:var(--cyan)}
+.nav-button{padding:9px 18px;border:1px solid rgba(0,229,255,.45);border-radius:8px;color:var(--cyan)!important}
+
+.hero{min-height:82vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:135px 20px 75px;position:relative;overflow:hidden}
+.hero:before{content:"";position:absolute;width:650px;height:650px;border-radius:50%;background:rgba(88,65,255,.16);filter:blur(140px);top:5%;left:50%;transform:translateX(-50%)}
+.hero-content{max-width:950px;position:relative;z-index:2}
+.status{display:inline-flex;align-items:center;gap:9px;padding:8px 15px;border-radius:100px;border:1px solid rgba(0,229,255,.22);
+background:rgba(0,229,255,.06);color:#77f3ff;font-size:12px;font-weight:800;letter-spacing:1.4px;margin-bottom:25px}
+.status-dot{width:7px;height:7px;border-radius:50%;background:#65f5b1;box-shadow:0 0 12px #65f5b1}
+.hero h1{font-size:clamp(48px,8vw,88px);line-height:1;letter-spacing:-4px;margin-bottom:24px}
+.gradient-text{background:linear-gradient(90deg,#fff,#77f3ff,#8177ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{max-width:720px;margin:0 auto 34px;color:#9da5b5;font-size:18px}
+.hero-buttons{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+.primary,.secondary{display:inline-block;padding:14px 25px;border-radius:9px;font-weight:800;transition:.25s}
+.primary{background:linear-gradient(135deg,var(--cyan),var(--purple));color:#050710}
+.secondary{border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.035);color:#d8dce5}
+.primary:hover,.secondary:hover{transform:translateY(-3px)}
+
+.trustbar{padding:0 7% 30px}
+.trustgrid{max-width:1100px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--border);border-radius:16px;overflow:hidden;background:rgba(255,255,255,.025)}
+.trust{padding:18px;text-align:center;border-right:1px solid var(--border)}
+.trust:last-child{border-right:0}.trust strong{display:block;font-size:14px}.trust span{font-size:12px;color:var(--muted)}
+
+section{padding:90px 7%}
+.section-header{max-width:720px;margin-bottom:38px}
+.section-label{color:var(--cyan);text-transform:uppercase;font-size:12px;letter-spacing:2px;font-weight:800;margin-bottom:8px}
+.section-header h2{font-size:clamp(32px,5vw,48px);letter-spacing:-1px;margin-bottom:10px}
+.section-header p{color:var(--muted)}
+
+.games{background:rgba(255,255,255,.01)}
+.game-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.game-card{border:1px solid var(--border);background:linear-gradient(160deg,rgba(255,255,255,.055),rgba(255,255,255,.018));
+border-radius:18px;overflow:hidden;transition:.3s;display:flex;flex-direction:column}
+.game-card:hover{transform:translateY(-6px);border-color:rgba(0,229,255,.32)}
+.cover{height:190px;padding:20px;display:flex;align-items:flex-end;position:relative;background:
+radial-gradient(circle at 80% 20%,rgba(0,229,255,.24),transparent 35%),
+linear-gradient(135deg,#1a2240,#111827 55%,#09111d)}
+.cover:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 35%,rgba(7,9,18,.86))}
+.cover-title{position:relative;z-index:2;font-size:22px;font-weight:900;line-height:1.08;max-width:90%}
+.badge{position:absolute;z-index:3;top:14px;right:14px;padding:5px 8px;border-radius:5px;font-size:9px;letter-spacing:1px;font-weight:900;
+background:rgba(0,229,255,.1);border:1px solid rgba(0,229,255,.2);color:#7df5ff}
+.card-body{padding:18px;display:flex;flex-direction:column;gap:10px;flex:1}
+.game-name{font-size:17px;font-weight:800;line-height:1.25}
+.meta{display:flex;gap:7px;flex-wrap:wrap}
+.pill{font-size:10px;padding:4px 7px;border:1px solid var(--border);border-radius:100px;color:#b9c1d0;background:rgba(255,255,255,.03)}
+.price-row{display:flex;align-items:flex-end;justify-content:space-between;margin-top:auto;padding-top:5px}
+.price small{display:block;color:#778195;font-size:10px}.price strong{font-size:22px;color:#fff}
+.buy{border:0;cursor:pointer;padding:9px 13px;border-radius:8px;font-weight:800;background:linear-gradient(135deg,var(--cyan),var(--purple));color:#050710}
+.note{font-size:10px;color:#717b8e}
+
+.delivery-box{max-width:1100px;margin:auto;padding:36px;border-radius:22px;border:1px solid rgba(0,229,255,.15);
+background:linear-gradient(135deg,rgba(0,229,255,.06),rgba(109,99,255,.07))}
+.delivery-box h2{font-size:32px;margin-bottom:8px}.delivery-box>p{color:var(--muted);margin-bottom:25px}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.step{padding:20px;border:1px solid var(--border);border-radius:13px;background:rgba(255,255,255,.025)}
+.step-num{color:var(--cyan);font-weight:900;font-size:12px;margin-bottom:10px}.step h3{font-size:15px;margin-bottom:5px}.step p{font-size:12px;color:var(--muted)}
+
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.info-box{padding:36px;border:1px solid var(--border);border-radius:20px;background:rgba(255,255,255,.025)}
+.info-box h2{font-size:28px;margin-bottom:12px}.info-box p{color:var(--muted);margin-bottom:12px;font-size:14px}
+.policy-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.policy-links a{padding:8px 11px;border:1px solid var(--border);border-radius:8px;font-size:12px;color:#c7cfdd}
+
+.faq{max-width:900px;margin:auto}.faq-item{padding:22px 0;border-bottom:1px solid var(--border)}
+.faq-item h3{font-size:16px;margin-bottom:6px}.faq-item p{font-size:14px;color:var(--muted)}
+
+footer{padding:48px 7% 28px;border-top:1px solid var(--border);background:#05070d}
+.footer-main{display:flex;justify-content:space-between;gap:30px;margin-bottom:35px}.footer-brand p,.footer-contact p{color:#747c8d;font-size:13px;margin-top:7px}
+.footer-contact{text-align:right}.copyright{padding-top:18px;border-top:1px solid rgba(255,255,255,.05);color:#545b69;font-size:12px;text-align:center}
+
+/* modal */
+.modal{display:none;position:fixed;inset:0;z-index:3000;background:rgba(0,0,0,.72);padding:20px;align-items:center;justify-content:center}
+.modal.show{display:flex}.modal-card{width:min(620px,100%);max-height:92vh;overflow:auto;background:#0c111d;border:1px solid var(--border);border-radius:20px;padding:28px}
+.modal-head{display:flex;justify-content:space-between;gap:20px;margin-bottom:20px}.modal-head h2{font-size:25px}.close{border:0;background:none;color:#9da5b5;font-size:28px;cursor:pointer}
+.order-summary{padding:14px;border:1px solid var(--border);border-radius:10px;background:rgba(255,255,255,.03);margin-bottom:18px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{display:flex;flex-direction:column;gap:5px}.field.full{grid-column:1/-1}
+label{font-size:12px;color:#aeb6c6}input,select{width:100%;padding:11px 12px;border-radius:8px;border:1px solid var(--border);background:#080c15;color:#fff;outline:none}
+input:focus,select:focus{border-color:rgba(0,229,255,.45)}
+.check{display:flex;gap:9px;align-items:flex-start;margin:14px 0;color:#9da5b5;font-size:12px}.check input{width:auto;margin-top:3px}
+.checkout{width:100%;padding:13px;border:0;border-radius:9px;background:linear-gradient(135deg,var(--cyan),var(--purple));font-weight:900;color:#050710;cursor:pointer}
+.checkout-note{text-align:center;color:#6f7889;font-size:10px;margin-top:9px}
+
+@media(max-width:1050px){.game-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:850px){.game-grid{grid-template-columns:repeat(2,1fr)}.steps,.trustgrid{grid-template-columns:repeat(2,1fr)}.info-grid{grid-template-columns:1fr}.trust{border-bottom:1px solid var(--border)}}
+@media(max-width:650px){nav{padding:0 5%}.nav-links li:not(:last-child){display:none}.hero h1{letter-spacing:-2px}section{padding:70px 6%}.game-grid,.steps,.trustgrid{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.footer-main{flex-direction:column}.footer-contact{text-align:left}}
+</style>
 </head>
-
-
 <body>
 
-
-<!-- =========================
-     NAVIGATION
-========================== -->
-
 <nav>
-
-    <a href="#" class="logo">
-        NEX<span>O</span>RA
-    </a>
-
-    <ul class="nav-links">
-
-        <li>
-            <a href="#games">Games</a>
-        </li>
-
-        <li>
-            <a href="#platforms">Platforms</a>
-        </li>
-
-        <li>
-            <a href="#about">About</a>
-        </li>
-
-        <li>
-            <a href="#faq">FAQ</a>
-        </li>
-
-        <li>
-            <a href="#contact" class="nav-button">
-                Contact
-            </a>
-        </li>
-
-    </ul>
-
+<a href="#" class="logo">NEX<span>O</span>RA</a>
+<ul class="nav-links">
+<li><a href="#games">Games</a></li>
+<li><a href="#how">How it works</a></li>
+<li><a href="#about">About</a></li>
+<li><a href="#faq">FAQ</a></li>
+<li><a href="#contact" class="nav-button">Contact</a></li>
+</ul>
 </nav>
 
-
-
-<!-- =========================
-     HERO
-========================== -->
-
 <header class="hero">
-
-    <div class="hero-content">
-
-        <div class="status">
-            <span class="status-dot"></span>
-            NEXORA STORE · PRE-LAUNCH
-        </div>
-
-        <h1>
-            Your next game
-            <span class="gradient-text">
-                starts here.
-            </span>
-        </h1>
-
-        <p>
-            NEXORA is an upcoming digital games and entertainment
-            storefront built to make discovering and accessing digital
-            gaming content simple, secure and convenient.
-        </p>
-
-        <div class="hero-buttons">
-
-            <a href="#games" class="primary-button">
-                Explore NEXORA
-            </a>
-
-            <a href="#about" class="secondary-button">
-                About Our Store
-            </a>
-
-        </div>
-
-    </div>
-
+<div class="hero-content">
+<div class="status"><span class="status-dot"></span> DIGITAL GAME STORE</div>
+<h1>Great games.<br><span class="gradient-text">Better prices.</span></h1>
+<p>Shop digital PC and console game activation keys from NEXORA. Check the platform and activation region, place your order, and receive your key electronically within 24 hours.</p>
+<div class="hero-buttons">
+<a href="#games" class="primary">Browse Games</a>
+<a href="#how" class="secondary">How Delivery Works</a>
+</div>
+</div>
 </header>
 
-
-
-<!-- =========================
-     UPCOMING PRODUCTS
-========================== -->
+<div class="trustbar">
+<div class="trustgrid">
+<div class="trust"><strong>🔑 Digital Keys</strong><span>No physical shipping</span></div>
+<div class="trust"><strong>⏱ Within 24 Hours</strong><span>Electronic delivery</span></div>
+<div class="trust"><strong>🛡 Delivery Guarantee</strong><span>Refund if we cannot deliver</span></div>
+<div class="trust"><strong>💬 Customer Support</strong><span>Help with your order</span></div>
+</div>
+</div>
 
 <section class="games" id="games">
+<div class="section-header">
+<div class="section-label">NEXORA Launch Catalog</div>
+<h2>Choose your next game.</h2>
+<p>Our focused launch catalog keeps things simple. Always check the listed platform and region before ordering.</p>
+</div>
 
-    <div class="section-header">
-
-        <div class="section-label">
-            Coming to NEXORA
-        </div>
-
-        <h2>
-            Digital gaming, one destination.
-        </h2>
-
-        <p>
-            We're building our catalog with the goal of offering
-            digital gaming products across popular PC and console
-            platforms.
-        </p>
-
-    </div>
-
-
-    <div class="game-grid">
-
-        <div class="game-card">
-
-            <div class="game-icon">
-                🏙️
-            </div>
-
-            <span class="coming-soon">
-                COMING SOON
-            </span>
-
-            <h3>
-                Action & Open World
-            </h3>
-
-            <p>
-                Digital PC game licenses
-            </p>
-
-        </div>
-
-
-        <div class="game-card">
-
-            <div class="game-icon">
-                🏎️
-            </div>
-
-            <span class="coming-soon">
-                COMING SOON
-            </span>
-
-            <h3>
-                Racing
-            </h3>
-
-            <p>
-                Digital PC & console titles
-            </p>
-
-        </div>
-
-
-        <div class="game-card">
-
-            <div class="game-icon">
-                ⚔️
-            </div>
-
-            <span class="coming-soon">
-                COMING SOON
-            </span>
-
-            <h3>
-                RPG & Adventure
-            </h3>
-
-            <p>
-                Digital games and content
-            </p>
-
-        </div>
-
-
-        <div class="game-card">
-
-            <div class="game-icon">
-                🎮
-            </div>
-
-            <span class="coming-soon">
-                COMING SOON
-            </span>
-
-            <h3>
-                More Games
-            </h3>
-
-            <p>
-                A growing digital catalog
-            </p>
-
-        </div>
-
-    </div>
-
+<div class="game-grid" id="gameGrid"></div>
 </section>
 
-
-
-<!-- =========================
-     PLATFORMS
-========================== -->
-
-<section id="platforms">
-
-    <div class="section-header">
-
-        <div class="section-label">
-            Platforms
-        </div>
-
-        <h2>
-            Built for gamers.
-        </h2>
-
-        <p>
-            NEXORA is preparing to support digital products
-            across major gaming ecosystems.
-        </p>
-
-    </div>
-
-
-    <div class="platform-grid">
-
-        <div class="platform">
-
-            <div class="platform-icon">
-                🖥️
-            </div>
-
-            <h3>PC Gaming</h3>
-
-            <p>
-                Digital game licenses
-            </p>
-
-        </div>
-
-
-        <div class="platform">
-
-            <div class="platform-icon">
-                🎮
-            </div>
-
-            <h3>Console Gaming</h3>
-
-            <p>
-                Games and digital content
-            </p>
-
-        </div>
-
-
-        <div class="platform">
-
-            <div class="platform-icon">
-                💎
-            </div>
-
-            <h3>Gaming Content</h3>
-
-            <p>
-                Selected digital products
-            </p>
-
-        </div>
-
-
-        <div class="platform">
-
-            <div class="platform-icon">
-                🎁
-            </div>
-
-            <h3>Digital Codes</h3>
-
-            <p>
-                Convenient digital delivery
-            </p>
-
-        </div>
-
-    </div>
-
+<section id="how">
+<div class="delivery-box">
+<div class="section-label">24-Hour Digital Delivery</div>
+<h2>From checkout to game key.</h2>
+<p>Orders are manually verified and fulfilled during our launch period so we can keep the process reliable.</p>
+<div class="steps">
+<div class="step"><div class="step-num">01 · CHOOSE</div><h3>Select your game</h3><p>Check edition, platform and activation region carefully.</p></div>
+<div class="step"><div class="step-num">02 · ORDER</div><h3>Enter your details</h3><p>Provide a valid email address for your order and key delivery.</p></div>
+<div class="step"><div class="step-num">03 · PAY</div><h3>Secure checkout</h3><p>Complete payment through our supported payment gateway.</p></div>
+<div class="step"><div class="step-num">04 · RECEIVE</div><h3>Get your key</h3><p>Your activation key and instructions are delivered electronically within 24 hours.</p></div>
+</div>
+</div>
 </section>
-
-
-
-<!-- =========================
-     HOW IT WORKS
-========================== -->
-
-<section>
-
-    <div class="section-header">
-
-        <div class="section-label">
-            The NEXORA Experience
-        </div>
-
-        <h2>
-            Simple from start to finish.
-        </h2>
-
-    </div>
-
-
-    <div class="steps">
-
-        <div class="step">
-
-            <div class="step-number">
-                01
-            </div>
-
-            <h3>Discover</h3>
-
-            <p>
-                Browse available games and digital gaming products.
-            </p>
-
-        </div>
-
-
-        <div class="step">
-
-            <div class="step-number">
-                02
-            </div>
-
-            <h3>Choose</h3>
-
-            <p>
-                Select the product and platform that suits you.
-            </p>
-
-        </div>
-
-
-        <div class="step">
-
-            <div class="step-number">
-                03
-            </div>
-
-            <h3>Purchase</h3>
-
-            <p>
-                Complete your order through our checkout once the NEXORA store launches.
-            </p>
-
-        </div>
-
-
-        <div class="step">
-
-            <div class="step-number">
-                04
-            </div>
-
-            <h3>Play</h3>
-
-            <p>
-                Receive your digital product and follow its
-                platform-specific activation instructions.
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =========================
-     ABOUT
-========================== -->
 
 <section id="about">
-
-    <div class="about-box">
-
-        <div class="section-label">
-            About NEXORA
-        </div>
-
-        <h2>
-            Building a better digital gaming store.
-        </h2>
-
-        <p>
-            NEXORA is an independent digital storefront currently
-            preparing for launch.
-        </p>
-
-        <p>
-            We are establishing relationships with digital content
-            distributors and developing the infrastructure required
-            to provide customers with a reliable and convenient
-            purchasing experience.
-        </p>
-
-        <p>
-            Products will only become available for purchase once
-            the appropriate distribution arrangements and store
-            systems are in place.
-        </p>
-
-    </div>
-
+<div class="info-grid">
+<div class="info-box">
+<div class="section-label">About NEXORA</div>
+<h2>An independent digital gaming store.</h2>
+<p>NEXORA is a Sri Lanka-based independent online store focused on digital game activation keys for PC and console platforms.</p>
+<p>We source our launch catalog through digital-game distribution channels and clearly identify the platform and activation region on each product.</p>
+<p>NEXORA is not affiliated with Steam, Rockstar Games, PlayStation, Xbox or the publishers shown in our catalog unless explicitly stated.</p>
+</div>
+<div class="info-box" id="policies">
+<div class="section-label">Customer Protection</div>
+<h2>Clear before you buy.</h2>
+<p>If NEXORA cannot deliver your purchased digital key within the stated 24-hour delivery period, you may request a full refund.</p>
+<p>Because activation keys are digital products, a valid key that has already been revealed cannot normally be returned simply because the customer changed their mind. Invalid, already-used or incorrect keys are reviewed for replacement or refund.</p>
+<div class="policy-links">
+<a href="#refund">Refund Policy</a><a href="#privacy">Privacy Policy</a><a href="#terms">Terms & Conditions</a>
+</div>
+</div>
+</div>
 </section>
 
-
-
-<!-- =========================
-     DISTRIBUTORS
-========================== -->
-
-<section class="partner-section">
-
-    <div class="partner-box">
-
-        <div class="section-label">
-            Distribution & Publishing
-        </div>
-
-        <h2>
-            Let's work together.
-        </h2>
-
-        <p>
-            NEXORA welcomes opportunities to work with authorized
-            game distributors, publishers and digital-content
-            providers as we build our launch catalog.
-        </p>
-
-    </div>
-
+<section id="refund">
+<div class="info-box">
+<div class="section-label">Refund Policy</div>
+<h2>Refunds and digital products</h2>
+<p>If we are unable to deliver your purchased key within 24 hours of confirmed payment, you may request a full refund. If a delivered key is invalid, already used before delivery, or does not match the product ordered, contact us with the order number and relevant evidence so we can investigate and provide a replacement or refund where appropriate.</p>
+<p>Once a valid digital activation key has been revealed or delivered, change-of-mind returns are generally not accepted because the key cannot be securely returned as unused. This does not limit any rights you may have under applicable law.</p>
+</div>
 </section>
 
+<section id="privacy">
+<div class="info-box">
+<div class="section-label">Privacy Policy</div>
+<h2>How we use customer information</h2>
+<p>We collect information needed to process and support orders, such as your name, email address, phone number, billing/contact information, purchased product and order status. We use this information for payment processing, digital delivery, customer support, fraud prevention and legal/accounting requirements.</p>
+<p>NEXORA does not store your full card number or card security code. Payment credentials are handled by the payment provider. We do not sell customer personal information.</p>
+</div>
+</section>
 
-
-<!-- =========================
-     FAQ
-========================== -->
+<section id="terms">
+<div class="info-box">
+<div class="section-label">Terms & Conditions</div>
+<h2>Important purchase terms</h2>
+<p>Customers are responsible for checking the product edition, platform and activation region before ordering. Product availability and prices may change. An order is considered paid only after payment has been confirmed by our payment provider.</p>
+<p>Digital keys are intended for activation on the platform stated on the product listing. Delivery is electronic. Misuse, fraudulent payments, chargeback abuse or attempts to resell a delivered key may result in cancellation of service where permitted by law.</p>
+</div>
+</section>
 
 <section id="faq">
-
-    <div class="faq">
-
-        <div class="section-header">
-
-            <div class="section-label">
-                FAQ
-            </div>
-
-            <h2>
-                Frequently asked questions.
-            </h2>
-
-        </div>
-
-
-        <div class="faq-item">
-
-            <h3>
-                Is NEXORA currently accepting orders?
-            </h3>
-
-            <p>
-                Not yet. NEXORA is currently in its pre-launch
-                stage and is not accepting customer payments.
-            </p>
-
-        </div>
-
-
-        <div class="faq-item">
-
-            <h3>
-                What will NEXORA sell?
-            </h3>
-
-            <p>
-                We are preparing a catalog focused on digital
-                games and related digital gaming products.
-                The final catalog will depend on our distribution
-                arrangements.
-            </p>
-
-        </div>
-
-
-        <div class="faq-item">
-
-            <h3>
-                How will products be delivered?
-            </h3>
-
-            <p>
-                Eligible digital products will be delivered
-                electronically with the appropriate activation
-                or redemption instructions.
-            </p>
-
-        </div>
-
-
-        <div class="faq-item">
-
-            <h3>
-                When will NEXORA launch?
-            </h3>
-
-            <p>
-                Our storefront is currently being prepared.
-                Launch information will be announced once our
-                catalog and distribution systems are ready.
-            </p>
-
-        </div>
-
-    </div>
-
+<div class="faq">
+<div class="section-header"><div class="section-label">FAQ</div><h2>Frequently asked questions.</h2></div>
+<div class="faq-item"><h3>How do I receive my game key?</h3><p>Your key and activation information are sent electronically to the email address used for your order.</p></div>
+<div class="faq-item"><h3>How long does delivery take?</h3><p>During our launch period, we guarantee delivery within 24 hours after confirmed payment. Many orders may be completed sooner.</p></div>
+<div class="faq-item"><h3>What if NEXORA cannot deliver my order?</h3><p>If we cannot deliver within the promised 24-hour period, you can request a full refund.</p></div>
+<div class="faq-item"><h3>Can I activate every key in every country?</h3><p>No. Region restrictions vary by product. Always check the region shown on the product before purchasing.</p></div>
+<div class="faq-item"><h3>Can I return a key after receiving it?</h3><p>A revealed valid digital key normally cannot be returned for change of mind. Problems such as an invalid, previously used or incorrect key will be investigated.</p></div>
+</div>
 </section>
 
-
-
-<!-- =========================
-     FOOTER
-========================== -->
-
 <footer id="contact">
-
-    <div class="footer-main">
-
-        <div class="footer-brand">
-
-            <div class="logo">
-                NEX<span>O</span>RA
-            </div>
-
-            <p>
-                Digital Games & Entertainment.
-                A new digital storefront currently preparing
-                for launch.
-            </p>
-
-        </div>
-
-
-        <div class="footer-contact">
-
-            <strong>
-                Business Enquiries
-            </strong>
-
-            <p>
-                Email: pabasaradimuth12345@email.com
-            </p>
-
-            <p>
-                Sri Lanka
-            </p>
-
-        </div>
-
-    </div>
-
-
-    <div class="copyright">
-
-        © <span id="year"></span> NEXORA.
-        All rights reserved.
-
-    </div>
-
+<div class="footer-main">
+<div class="footer-brand">
+<div class="logo">NEX<span>O</span>RA</div>
+<p>Digital game keys for PC and console players.</p>
+</div>
+<div class="footer-contact">
+<strong>Customer & Business Support</strong>
+<p>Email: YOUR-BUSINESS-EMAIL@example.com</p>
+<p>Phone: +94 XX XXX XXXX</p>
+<p>Business address: ADD YOUR REAL BUSINESS ADDRESS, Sri Lanka</p>
+</div>
+</div>
+<div class="copyright">© <span id="year"></span> NEXORA. All rights reserved.</div>
 </footer>
 
-
+<div class="modal" id="checkoutModal" aria-hidden="true">
+<div class="modal-card">
+<div class="modal-head">
+<div><div class="section-label">Checkout</div><h2>Order details</h2></div>
+<button class="close" onclick="closeCheckout()" aria-label="Close">&times;</button>
+</div>
+<div class="order-summary" id="orderSummary"></div>
+<form id="orderForm">
+<div class="form-grid">
+<div class="field"><label>First name</label><input id="firstName" required autocomplete="given-name"></div>
+<div class="field"><label>Last name</label><input id="lastName" required autocomplete="family-name"></div>
+<div class="field full"><label>Email for key delivery</label><input id="email" type="email" required autocomplete="email"></div>
+<div class="field full"><label>Confirm email</label><input id="confirmEmail" type="email" required autocomplete="email"></div>
+<div class="field"><label>Phone / WhatsApp</label><input id="phone" type="tel" required autocomplete="tel"></div>
+<div class="field"><label>Country</label>
+<select id="country" required><option value="">Select country</option><option>Sri Lanka</option><option>United States</option><option>United Kingdom</option><option>Australia</option><option>Canada</option><option>Other</option></select>
+</div>
+</div>
+<label class="check"><input id="regionCheck" type="checkbox" required><span>I have checked the platform and activation region shown for this product.</span></label>
+<label class="check"><input type="checkbox" required><span>I agree to the Refund Policy, Privacy Policy and Terms & Conditions.</span></label>
+<button class="checkout" type="submit">Continue to Secure Payment</button>
+<div class="checkout-note">Payment integration will be connected to the verified NEXORA order backend before launch.</div>
+</form>
+</div>
+</div>
 
 <script>
+const games = [
+ {name:"Grand Theft Auto V Enhanced",short:"GTA V Enhanced",platform:"Rockstar Games",region:"Global",price:19.99,badge:"POPULAR"},
+ {name:"Red Dead Redemption 2",short:"Red Dead Redemption 2",platform:"Rockstar Games",region:"Global",price:22.99,badge:"TOP VALUE"},
+ {name:"Black Myth: Wukong",short:"Black Myth: Wukong",platform:"Steam",region:"Global",price:44.99,badge:"POPULAR"},
+ {name:"Days Gone",short:"Days Gone",platform:"Steam",region:"Global*",price:19.99,badge:"GREAT VALUE"},
+ {name:"Dying Light: The Beast",short:"Dying Light: The Beast",platform:"Steam",region:"ROW*",price:32.99,badge:"NEW"},
+ {name:"Dying Light 2 Reloaded Edition",short:"Dying Light 2",platform:"Steam",region:"Global*",price:16.99,badge:"VALUE"},
+ {name:"God of War",short:"God of War",platform:"Steam",region:"Global*",price:24.99,badge:"POPULAR"},
+ {name:"Marvel's Spider-Man Remastered",short:"Spider-Man Remastered",platform:"Steam",region:"Global*",price:29.99,badge:"POPULAR"},
+ {name:"DOOM: The Dark Ages",short:"DOOM: The Dark Ages",platform:"Steam",region:"Global*",price:34.99,badge:"NEW"},
+ {name:"Resident Evil Requiem",short:"Resident Evil Requiem",platform:"Steam",region:"Global*",price:49.99,badge:"NEW"},
+ {name:"WWE 2K26",short:"WWE 2K26",platform:"Steam",region:"Global*",price:32.99,badge:"NEW"},
+ {name:"Grand Theft Auto VI",short:"GTA VI",platform:"Xbox Series X|S",region:"Global*",price:76.99,badge:"PRE-ORDER"}
+];
 
-    // Automatically displays the current year.
+const grid=document.getElementById("gameGrid");
+games.forEach((g,i)=>{
+ const card=document.createElement("article");
+ card.className="game-card";
+ card.innerHTML=`
+ <div class="cover"><span class="badge">${g.badge}</span><div class="cover-title">${g.short}</div></div>
+ <div class="card-body">
+   <div class="game-name">${g.name}</div>
+   <div class="meta"><span class="pill">${g.platform}</span><span class="pill">${g.region}</span><span class="pill">Digital Key</span></div>
+   <div class="price-row"><div class="price"><small>NEXORA PRICE</small><strong>$${g.price.toFixed(2)}</strong></div>
+   <button class="buy" onclick="openCheckout(${i})">Buy Now</button></div>
+   <div class="note">Electronic delivery within 24 hours. *Check exact country restrictions before purchase.</div>
+ </div>`;
+ grid.appendChild(card);
+});
 
-    document.getElementById("year").textContent =
-        new Date().getFullYear();
-
+let selectedGame=null;
+function openCheckout(i){
+ selectedGame=games[i];
+ document.getElementById("orderSummary").innerHTML=
+ `<strong>${selectedGame.name}</strong><br><span style="color:#8f98aa">${selectedGame.platform} · ${selectedGame.region} · Digital Key</span><br><strong style="font-size:20px">$${selectedGame.price.toFixed(2)}</strong>`;
+ document.getElementById("checkoutModal").classList.add("show");
+ document.getElementById("checkoutModal").setAttribute("aria-hidden","false");
+}
+function closeCheckout(){
+ document.getElementById("checkoutModal").classList.remove("show");
+ document.getElementById("checkoutModal").setAttribute("aria-hidden","true");
+}
+document.getElementById("checkoutModal").addEventListener("click",e=>{if(e.target.id==="checkoutModal")closeCheckout()});
+document.getElementById("orderForm").addEventListener("submit",e=>{
+ e.preventDefault();
+ const email=document.getElementById("email").value.trim();
+ const confirm=document.getElementById("confirmEmail").value.trim();
+ if(email.toLowerCase()!==confirm.toLowerCase()){alert("The email addresses do not match. Please check them.");return;}
+ alert("Checkout form is ready. Next we will connect this button to Supabase + PayHere so the order is securely created and payment can be verified.");
+});
+document.getElementById("year").textContent=new Date().getFullYear();
 </script>
-
-
 </body>
-</html>
+</html>'''
+
+out = Path("/mnt/data/nexora_payhere_ready_frontend.html")
+out.write_text(html, encoding="utf-8")
+print(f"Created {out} ({len(html):,} characters)")
