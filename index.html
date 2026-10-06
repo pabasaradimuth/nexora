@@ -325,8 +325,4 @@ document.getElementById("orderForm").addEventListener("submit",e=>{
 document.getElementById("year").textContent=new Date().getFullYear();
 </script>
 </body>
-</html>'''
-
-out = Path("/mnt/data/nexora_payhere_ready_frontend.html")
-out.write_text(html, encoding="utf-8")
-print(f"Created {out} ({len(html):,} characters)")
+</html>
